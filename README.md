@@ -1,6 +1,8 @@
 # Ekko
 
-## Branches:
+## Branches from master:
 
---mockup
+--mockup<br>
 --prototype
+
+* you're currently looking at the mockup branch *
