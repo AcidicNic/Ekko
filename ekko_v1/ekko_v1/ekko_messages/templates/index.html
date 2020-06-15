@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if message_list %}
+    <ul>
+        {% for message in message_list %}
+            <li><a href="/">{{ message.message_text }}</a></li>
+
+        {% endfor %}
+    </ul>
+{% else %}
+    <p> No Messages are availible.</p>
+{% endif %}
+
+
+<p style="color:red">Dev note: Right here make a textbox and a feild to enter the recipients key and the senders message</p>
+<p style="color:red">Dev note: make a send button that just points back to "sucess/"</p>
+<p style="color:red">Dev note: Add any notes for things to add, feel free to change anything. I just needed to use some bootstrap to see what I was doing.
+Logging in does actually work, but logging out does not yet. There is a database and models for messages but they are not displaying yet. If you could get the mock messages to go from the text feild to display here or on the success page would be great. </p>
+<br>
+<p style="color:red">Dev note: It would be cool to get to the point where we can have one users message send to another user. But we might want to change the entire framework before we worry about that part. </p>
+
+
+{% endblock %}
