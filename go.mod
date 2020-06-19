@@ -1,4 +1,4 @@
-module ekko
+module github.com/omarsagoo/ekko
 
 go 1.14
 
