@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/omarsagoo/omar-ekko/handler"
+	"github.com/AcidicNic/Ekko/handler"
 )
 
 func Start() {
