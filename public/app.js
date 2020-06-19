@@ -51,10 +51,11 @@ new Vue({
             this.joined = true;
         },   
         avatarURL: function(avatar) {
-            if (avatar == "") {
-                avatar = "avatar.jpg"
+             if (avatar.match(/\.(jpeg|jpg|gif|png)$/) != null) {
+                return avatar;
+            } else {
+                return "avatar.jpg"
             }
-            return avatar;
         }
     }
 });
