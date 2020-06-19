@@ -4,10 +4,10 @@ import (
 	"log"
 	"net/http"
 
-	"https://github.com/AcidicNic/Ekko/handler"
+	"github.com/omarsagoo/omar-ekko/handler"
 )
 
-func start() {
+func Start() {
 	// create file server
 	fs := http.FileServer(http.Dir("../public"))
 	http.Handle("/", fs)
