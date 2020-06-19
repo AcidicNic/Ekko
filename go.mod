@@ -1,5 +1,3 @@
-module github.com/omarsagoo/ekko
+module github.com/omarsagoo/omar-ekko
 
 go 1.14
-
-require github.com/gorilla/websocket v1.4.2 // indirect
