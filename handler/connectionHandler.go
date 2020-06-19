@@ -18,7 +18,7 @@ var (
 	}
 )
 
-func handleConnections(w http.ResponseWriter, r *http.Request) {
+func HandleConnections(w http.ResponseWriter, r *http.Request) {
 	// upgrade Get request to websocket
 	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {

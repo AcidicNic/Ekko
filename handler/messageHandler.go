@@ -2,7 +2,7 @@ package handler
 
 import "log"
 
-func handleMessages() {
+func HandleMessages() {
 	for {
 		msg := <-broadcast
 
