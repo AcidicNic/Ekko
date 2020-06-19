@@ -1,8 +1,10 @@
 package handler
 
-import "log"
+import (
+	"log"
+)
 
-// HandleMessages sends and recieves messages from users.
+// HandleMessages sends and receives messages from users.
 func HandleMessages() {
 	for {
 		msg := <-broadcast

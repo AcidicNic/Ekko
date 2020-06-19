@@ -38,10 +38,6 @@ new Vue({
             }
         },
         join: function () {
-            // if (this.avatar) {
-            //     Materialize.toast('You must enter a link to an image to use as an avatar, leave blank for default', 2000);
-            //     return
-            // }
             if (!this.username) {
                 Materialize.toast('You must choose a username', 2000);
                 return
