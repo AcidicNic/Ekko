@@ -7,6 +7,7 @@ import (
 	"github.com/AcidicNic/Ekko/handler"
 )
 
+// Start starts the server on  localhost:8000
 func Start() {
 	// create file server
 	fs := http.FileServer(http.Dir("../public"))
@@ -18,6 +19,7 @@ func Start() {
 	// start listening for messages
 	go handler.HandleMessages()
 
+	// start the server on port :8000
 	log.Println("http server started on port :8000")
 	err := http.ListenAndServe(":8000", nil)
 	if err != nil {

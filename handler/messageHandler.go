@@ -2,6 +2,7 @@ package handler
 
 import "log"
 
+// HandleMessages sends and recieves messages from users.
 func HandleMessages() {
 	for {
 		msg := <-broadcast

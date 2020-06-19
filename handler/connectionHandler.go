@@ -7,6 +7,7 @@ import (
 	"github.com/gorilla/websocket"
 )
 
+// global variables
 var (
 	clients   = make(map[*websocket.Conn]bool) // client connections map
 	broadcast = make(chan Message)             // Broadcast Channel
@@ -18,6 +19,7 @@ var (
 	}
 )
 
+// HandleConnections maintains the connection for each user in the chat
 func HandleConnections(w http.ResponseWriter, r *http.Request) {
 	// upgrade Get request to websocket
 	ws, err := upgrader.Upgrade(w, r, nil)
