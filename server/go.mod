@@ -2,7 +2,4 @@ module github.com/AcidicNic/Ekko/server
 
 go 1.14
 
-require (
-	github.com/gorilla/websocket v1.4.2 // indirect
-	github.com/omarsagoo/omar-ekko/handler v0.0.0-20200619113322-c70868440cae // indirect
-)
+require github.com/AcidicNic/Ekko/handler v0.0.0-20200619114707-90f21a06ac8c
