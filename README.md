@@ -7,7 +7,6 @@ Decentralized Messaging Platform that stores user info on a blockckchain and use
 $ git clone https://www.github.com/AcidicNic/Ekko
 $ cd Ekko
 $ cd src
+$ go build .
 $ go run main.go
 ```
-
-
