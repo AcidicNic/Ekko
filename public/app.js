@@ -42,6 +42,13 @@ new Vue({
                 Materialize.toast('You must choose a username', 2000);
                 return
             }
+            this.ws.send(
+                JSON.stringify({
+                        avatar: this.avatar,
+                        username: this.username,
+                        message: ""
+                })
+            );
             this.avatar = $('<p>').html(this.avatar).text();
             this.username = $('<p>').html(this.username).text();
             this.joined = true;
