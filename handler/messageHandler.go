@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"log"
 )
 
@@ -8,6 +9,14 @@ import (
 func HandleMessages() {
 	for {
 		msg := <-broadcast
+
+		if msg.Message == "" {
+			usr := User{Username: msg.Username, Avatar: msg.Avatar}
+
+			msg.Message = fmt.Sprintf("NEW USER JOINED:  %s", usr.Username)
+			msg.Username = "ATTENTION!"
+			msg.Avatar = "red-alert.png"
+		}
 
 		for client := range clients {
 			err := client.WriteJSON(msg)

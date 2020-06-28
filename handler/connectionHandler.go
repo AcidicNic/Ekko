@@ -40,6 +40,11 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 		err := ws.ReadJSON(&msg)
 		if err != nil {
 			log.Printf("ConnectionHandlerMsg: %v", err)
+
+			if websocket.IsCloseError(err, 1001) {
+				broadcast <- Message{Username: "ATTENTION!", Avatar: "red-alert.png", Message: "Someone left the chat."}
+			}
+
 			delete(clients, ws)
 			break
 		}
