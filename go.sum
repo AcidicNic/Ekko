@@ -1,7 +1,10 @@
 github.com/AcidicNic/Ekko/handler v0.0.0-20200619114707-90f21a06ac8c h1:PzM3F2qMGKYLuC8WS1R3rkVd8+rJqMQ+TY5SH4KfR9c=
 github.com/AcidicNic/Ekko/handler v0.0.0-20200619114707-90f21a06ac8c/go.mod h1:qNMgQ0N9Ew7Pq4vli4nDbMsa+Am1SPCBpe4EiMO0VTc=
+github.com/AcidicNic/Ekko/handler v0.0.0-20200628011535-b65a3e3f2d01 h1:M0L3delRPM3s902RMv/fbU0g5vEs4GV9/N+gJePqyXM=
+github.com/AcidicNic/Ekko/handler v0.0.0-20200628011535-b65a3e3f2d01/go.mod h1:qNMgQ0N9Ew7Pq4vli4nDbMsa+Am1SPCBpe4EiMO0VTc=
 github.com/AcidicNic/Ekko/server v0.0.0-20200619114707-90f21a06ac8c h1:fMMhotGo2Ysb5ipkLtaohGwmRaZ7ukGfYmIk84m+2I0=
 github.com/AcidicNic/Ekko/server v0.0.0-20200619114707-90f21a06ac8c/go.mod h1:5un6ICjU/CY+nYJGCKEbCOkPfr0brf2Z7WuV96Cr1fw=
+github.com/AcidicNic/Ekko/server v0.0.0-20200628011535-b65a3e3f2d01 h1:jtW/XMn9HltTEyYyo0cHu6YPQ3tTlX9Yr57Evdu1JYQ=
+github.com/AcidicNic/Ekko/server v0.0.0-20200628011535-b65a3e3f2d01/go.mod h1:htvnFcqlIqw6/ShgaYSwCHWIXMYLKSzOi5FzLFsFkW8=
 github.com/gorilla/websocket v1.4.2 h1:+/TMaTYc4QFitKJxsQ7Yye35DkWvkdLcvGKqM+x0Ufc=
 github.com/gorilla/websocket v1.4.2/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
-github.com/omarsagoo/omar-ekko/handler v0.0.0-20200619113322-c70868440cae/go.mod h1:O4Z8PDwOC0d2hrCHwGOw4tdUvbvjA8jcvAhBBaj+GgQ=
