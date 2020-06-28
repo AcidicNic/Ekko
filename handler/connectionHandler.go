@@ -9,6 +9,7 @@ import (
 
 // global variables
 var (
+	allUsers  AllUsers
 	clients   = make(map[*websocket.Conn]bool) // client connections map
 	broadcast = make(chan Message)             // Broadcast Channel
 	// configure the upgrader

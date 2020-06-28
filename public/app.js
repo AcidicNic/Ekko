@@ -41,7 +41,7 @@ new Vue({
             if (!this.username) {
                 Materialize.toast('You must choose a username', 2000);
                 return
-            }
+            };
             this.ws.send(
                 JSON.stringify({
                         avatar: this.avatar,
