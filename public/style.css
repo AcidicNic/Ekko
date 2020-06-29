@@ -2,11 +2,44 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background-color: black;
 }
 
 main {
     flex: 1 0 auto;
 }
+
+nav {
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    display: inline-block;
+    padding-top: 1rem;
+    padding-bottom: .35rem;
+    padding-left: 1rem;
+    margin-right: 1rem;
+
+    font-size: 1.25rem;
+    line-height: inherit;
+    white-space: nowrap;
+
+    -webkit-text-size-adjust: 100%;
+    background-color: rgb(255,187,51);
+}
+
+
+
+*.waves-effect  {
+    background-color: rgb(255,187,51);
+}
+
+
+input, text {
+    color: white;
+}
+
+
+
+
 
 #chat-messages {
     min-height: 10vh;
