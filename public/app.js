@@ -45,7 +45,7 @@ new Vue({
             this.avatar = $('<p>').html(this.avatar).text();
             this.username = $('<p>').html(this.username).text();
             this.joined = true;
-        },   
+        },
         avatarURL: function(avatar) {
              if (avatar.match(/\.(jpeg|jpg|gif|png)$/) != null) {
                 return avatar;
