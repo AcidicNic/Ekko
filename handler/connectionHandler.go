@@ -31,10 +31,14 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 	// close when this function ends
 	defer ws.Close()
 
+	// create a map that holds all the server instances by uuid,
+	// key = uuid, value = clients map
+
 	// add client to global clients map
 	clients[ws] = true
 
 	for {
+		// initialize msg variable of Message type
 		var msg Message
 
 		// read new msg in as JSON, and initialize is as a Message object

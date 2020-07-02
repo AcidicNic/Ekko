@@ -12,7 +12,6 @@ func Start() {
 	// create file server
 	fs := http.FileServer(http.Dir("../public"))
 	http.Handle("/", fs)
-
 	// configure websocket route
 	http.HandleFunc("/ws", handler.HandleConnections)
 
