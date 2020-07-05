@@ -19,6 +19,7 @@ func HandleMessages() {
 		}
 
 		for client := range clients {
+			// Is this where we put the encryption of the message?
 			err := client.WriteJSON(msg)
 			if err != nil {
 				log.Printf("error: %v", err)
