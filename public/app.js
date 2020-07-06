@@ -14,6 +14,9 @@ new Vue({
         this.ws = new WebSocket('ws://' + window.location.host + '/ws');
         this.ws.addEventListener('message', function(e) {
             var msg = JSON.parse(e.data);
+            if (msg.encrypted == true) {
+                msg.message = CryptoJS.AES.decrypt(msg.message, '394812730425442A472D2F423F452848').toString(CryptoJS.enc.Utf8)
+            }
             self.chatContent += '<div class="chip">'
                     + '<img src="' + self.avatarURL(msg.avatar) + '">' // Avatar
                     + msg.username
@@ -31,7 +34,9 @@ new Vue({
                     JSON.stringify({
                         avatar: this.avatar,
                         username: this.username,
-                        message: $('<p>').html(this.newMsg).text() // Strip out html
+                        message: CryptoJS.AES.encrypt($('<p>').html(this.newMsg).text(),'394812730425442A472D2F423F452848', {
+                            mode: CryptoJS.mode.CBC}).toString(), // Strip out html
+                        encrypted: true
                     }
                 ));
                 this.newMsg = ''; // Reset newMsg
@@ -46,7 +51,8 @@ new Vue({
                 JSON.stringify({
                         avatar: this.avatar,
                         username: this.username,
-                        message: ""
+                        message: "",
+                        encrypted: false
                 })
             );
             this.avatar = $('<p>').html(this.avatar).text();
