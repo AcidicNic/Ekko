@@ -7,16 +7,19 @@ new Vue({
         chatContent: '', // A running list of chat messages displayed on the screen
         avatar: null, // avatar address used for grabbing an avatar
         username: null, // Our username
-        joined: false // True if avatar and username have been filled in
+        joined: false, // True if avatar and username have been filled in
+        leaving: false // false unless the user is leaving
     },
     created: function() {
         var self = this;
         this.ws = new WebSocket('ws://' + window.location.host + '/ws');
         this.ws.addEventListener('message', function(e) {
             var msg = JSON.parse(e.data);
+            // if the message is encrypted, decrypt it before showing the message
             if (msg.encrypted == true) {
                 msg.message = CryptoJS.AES.decrypt(msg.message, '394812730425442A472D2F423F452848').toString(CryptoJS.enc.Utf8)
             }
+            // content for the chat messages
             self.chatContent += '<div class="chip">'
                     + '<img src="' + self.avatarURL(msg.avatar) + '">' // Avatar
                     + msg.username
@@ -26,17 +29,36 @@ new Vue({
             var element = document.getElementById('chat-messages');
             element.scrollTop = element.scrollHeight; // Auto scroll to the bottom
         });
+        // Event listener for when someone leaves.
+        window.addEventListener("beforeunload", e => {
+            // prevents the browsers default action for closing
+            e.preventDefault
+            e.returnValue = ""
+            
+            // sends the information for the user leaving if they do.
+            this.ws.send(
+                JSON.stringify({
+                    avatar: this.avatar,
+                    username: this.username,
+                    message: "USERLEAVING",
+                    encrypted: false,
+                    leaving: true
+                })
+            )
+        });
     },
     methods: {
         send: function () {
+            // makes sure the message isnt blank, if not, sends the message to the server.
             if (this.newMsg != '') {
                 this.ws.send(
                     JSON.stringify({
                         avatar: this.avatar,
                         username: this.username,
                         message: CryptoJS.AES.encrypt($('<p>').html(this.newMsg).text(),'394812730425442A472D2F423F452848', {
-                            mode: CryptoJS.mode.CBC}).toString(), // Strip out html
-                        encrypted: true
+                                                                mode: CryptoJS.mode.CBC}).toString(), // Strip out html
+                        encrypted: true,
+                        leaving: false
                     }
                 ));
                 this.newMsg = ''; // Reset newMsg
@@ -52,13 +74,14 @@ new Vue({
                         avatar: this.avatar,
                         username: this.username,
                         message: "",
-                        encrypted: false
+                        encrypted: false,
+                        leaving: false
                 })
             );
             this.avatar = $('<p>').html(this.avatar).text();
             this.username = $('<p>').html(this.username).text();
             this.joined = true;
-        },   
+        },
         avatarURL: function(avatar) {
              if (avatar.match(/\.(jpeg|jpg|gif|png)$/) != null) {
                 return avatar;

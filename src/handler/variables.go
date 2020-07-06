@@ -25,6 +25,7 @@ type Message struct {
 	Message   string `json:"message"`
 	Avatar    string `json:"avatar"`
 	Encrypted bool   `json:"encrypted"`
+	Leaving   bool   `json:"leaving"`
 }
 
 // User object, holds information for a specific user

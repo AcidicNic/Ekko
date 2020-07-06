@@ -3,8 +3,6 @@ package handler
 import (
 	"log"
 	"net/http"
-
-	"github.com/gorilla/websocket"
 )
 
 // HandleConnections maintains the connection for each user in the chat
@@ -28,11 +26,6 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 		err := ws.ReadJSON(&msg)
 		if err != nil {
 			log.Printf("ConnectionHandlerMsg: %v", err)
-
-			if websocket.IsCloseError(err, 1001) {
-				broadcast <- Message{Username: "ATTENTION!", Avatar: "red-alert.png", Message: "Someone left the chat.", Encrypted: false}
-			}
-
 			delete(clients, ws)
 			break
 		}
