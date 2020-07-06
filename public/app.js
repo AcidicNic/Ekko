@@ -35,16 +35,19 @@ new Vue({
             e.preventDefault
             e.returnValue = ""
             
-            // sends the information for the user leaving if they do.
-            this.ws.send(
-                JSON.stringify({
-                    avatar: this.avatar,
-                    username: this.username,
-                    message: "USERLEAVING",
-                    encrypted: false,
-                    leaving: true
-                })
-            )
+            window.onunload = event => {
+                // sends the information for the user leaving if they do.            
+                this.ws.send(
+                    JSON.stringify({
+                        avatar: this.avatar,
+                        username: this.username,
+                        message: "USERLEAVING",
+                        encrypted: false,
+                        leaving: true
+                    })
+                )
+            }
+            
         });
     },
     methods: {
@@ -91,3 +94,7 @@ new Vue({
         }
     }
 });
+
+function confirmLeave() {
+    return window.confirm('Do you really want to leave? you have unsaved changes!')
+}
