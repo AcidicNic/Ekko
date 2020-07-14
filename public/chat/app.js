@@ -1,3 +1,5 @@
+// import { format } from "url";
+
 new Vue({
     el: '#app',
 
@@ -8,7 +10,8 @@ new Vue({
         avatar: null, // avatar address used for grabbing an avatar
         username: null, // Our username
         joined: false, // True if avatar and username have been filled in
-        leaving: false // false unless the user is leaving
+        leaving: false, // false unless the user is leaving
+        uuid: null
     },
     created: function() {
         var self = this;
@@ -47,7 +50,6 @@ new Vue({
                     })
                 )
             }
-            
         });
     },
     methods: {
@@ -94,7 +96,3 @@ new Vue({
         }
     }
 });
-
-function confirmLeave() {
-    return window.confirm('Do you really want to leave? you have unsaved changes!')
-}

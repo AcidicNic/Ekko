@@ -8,6 +8,7 @@ import (
 
 // global variables
 var (
+	UUID      string
 	allUsers  AllUsers
 	clients   = make(map[*websocket.Conn]bool) // client connections map
 	broadcast = make(chan Message)             // Broadcast Channel
@@ -26,6 +27,7 @@ type Message struct {
 	Avatar    string `json:"avatar"`
 	Encrypted bool   `json:"encrypted"`
 	Leaving   bool   `json:"leaving"`
+	UUID      string `json:"uuid"`
 }
 
 // User object, holds information for a specific user

@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -29,6 +30,7 @@ func HandleConnections(w http.ResponseWriter, r *http.Request) {
 			delete(clients, ws)
 			break
 		}
+		fmt.Println(msg.UUID)
 		// send the msg to the broadcast channel, to be handled by handleMessage goroutine
 		broadcast <- msg
 	}
