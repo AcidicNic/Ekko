@@ -20,8 +20,8 @@ func Start() {
 	go handler.HandleMessages()
 
 	// start the server on port :8000
-	log.Println("http server started on port :80")
-	err := http.ListenAndServe(":443", nil)
+	log.Println("http server started on port :8080")
+	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
