@@ -1,6 +1,0 @@
-# github.com/Luzifer/go-openssl v2.0.0+incompatible
-## explicit
-github.com/Luzifer/go-openssl
-# github.com/gorilla/websocket v1.4.2
-## explicit
-github.com/gorilla/websocket

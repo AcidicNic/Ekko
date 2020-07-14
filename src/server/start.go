@@ -19,7 +19,7 @@ func Start() {
 	// start listening for messages
 	go handler.HandleMessages()
 
-	// start the server on port :8000
+	// start the server on port :8080
 	log.Println("http server started on port :8080")
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
