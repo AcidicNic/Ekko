@@ -15,7 +15,7 @@ new Vue({
     },
     created: function() {
         var self = this;
-        this.ws = new WebSocket('ws://' + "ekko-chat.dev.ekko.cc" + '/ws');
+        this.ws = new WebSocket('ws://' + window.location.host + '/ws');
         this.ws.addEventListener('message', function(e) {
             var msg = JSON.parse(e.data);
             // if the message is encrypted, decrypt it before showing the message
