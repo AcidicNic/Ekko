@@ -7,6 +7,6 @@ RUN go build . && go install .
 
 ENTRYPOINT [ "/go/bin/ekko" ]
 
-EXPOSE 443
+EXPOSE 8080
 
 CMD ["go", "run", "main.go"]
