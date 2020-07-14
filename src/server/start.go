@@ -21,7 +21,7 @@ func Start() {
 
 	// start the server on port :8000
 	log.Println("http server started on port :80")
-	err := http.ListenAndServe(":80", nil)
+	err := http.ListenAndServe(":443", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
