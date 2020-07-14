@@ -2,10 +2,10 @@
 # Ekko
 Encrypted Logless Messaging Platform that enables messaging in countries where social platforms are filtered, or for people that need anonymity during times of political turmoil.
 
-## Launch Page
+## Chat Page
 
-Available after DNS activation:
-[Click Here to View](http://mackroe.tech/ekko-launch/)
+To use the chat app:
+[Click Here to View](http://ekko-chat.dev.ekko.cc)
 
 ## To Run
 ```bash
