@@ -15,3 +15,19 @@ $ cd src
 $ go build main.go
 $ go run main.go
 ```
+navigate to localhost:8080
+
+## To Run with Docker
+```bash
+$ git clone https://www.github.com/AcidicNic/Ekko
+$ docker build -t ekko-image .
+$ docker run -p 8080:8080 --rm --name ekko-container ekko-image
+```
+navigate to localhost:8080
+
+## To deploy to caprover
+```bash
+$ git clone https://www.github.com/AcidicNic/Ekko
+$ docker build -t ekko-image .
+$ caprover deploy
+```
