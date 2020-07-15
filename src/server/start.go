@@ -10,7 +10,7 @@ import (
 // Start starts the server on  localhost:8000
 func Start() {
 	// create file server
-	fs := http.FileServer(http.Dir("../public/chat"))
+	fs := http.FileServer(http.Dir("../public"))
 	http.Handle("/", fs)
 
 	// configure websocket route
