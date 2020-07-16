@@ -8,8 +8,8 @@ import (
 
 // global variables
 var (
-	UUID      string
-	allUsers  AllUsers
+	UUID      string                           // not being used
+	allUsers  AllUsers                         // not being used
 	clients   = make(map[*websocket.Conn]bool) // client connections map
 	broadcast = make(chan Message)             // Broadcast Channel
 	// configure the upgrader
@@ -30,12 +30,14 @@ type Message struct {
 	UUID      string `json:"uuid"`
 }
 
+// User not being used
 // User object, holds information for a specific user
 type User struct {
 	Username string `json:"user"`
 	Avatar   string `json:"avatar"`
 }
 
+// AllUsers not being used
 // AllUsers object,  holds all the users in a string array
 type AllUsers struct {
 	Users []User `json:"users"`
