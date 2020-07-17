@@ -12,7 +12,7 @@ func HandleMessages() {
 
 		// if a new user joins. then send a message
 		if msg.Encrypted == false && msg.Leaving == false {
-			usr = User{Username: msg.Username, Avatar: msg.Avatar}
+			usr := User{Username: msg.Username, Avatar: msg.Avatar}
 
 			msg.Message = fmt.Sprintf("NEW USER JOINED:  %s", usr.Username)
 			msg.Username = "ATTENTION!"
