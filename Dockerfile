@@ -3,7 +3,7 @@ FROM golang:1.14
 
 # Define variables to use for the container
 ENV APP_NAME ekko
-ENV APP_PATH go/src/${APP_NAME}}
+ENV APP_PATH go/src/${APP_NAME}
 ENV PORT 8080
 
 # add the files in the current directory into the container at the path go/src/ekko
