@@ -75,21 +75,34 @@ new Vue({
             if (!this.username) {
                 Materialize.toast('You must choose a username', 2000);
                 return
-            };
-            this.ws.send(
-                JSON.stringify({
-                        avatar: this.avatar,
-                        username: this.username,
-                        message: "",
-                        encrypted: false,
-                        leaving: false,
-                        uuid: this.uuid
-                })
-            );
-            console.log(this.uuid)
-            this.avatar = $('<p>').html(this.avatar).text();
-            this.username = $('<p>').html(this.username).text();
-            this.joined = true;
+            }
+            if (!this.uuid) {
+                Materialize.toast('You must enter a room ID, If you do not have one then visit the create page!', 2000);
+                return
+            } 
+            axios.post('/room/exists', {
+                uuid: this.uuid
+            }).then(exists => {
+                console.log(exists)
+                if (!exists.data) {
+                    Materialize.toast('This room does not exist! please enter a valid room ID', 2000);
+                    return
+                } 
+                this.ws.send(
+                    JSON.stringify({
+                            avatar: this.avatar,
+                            username: this.username,
+                            message: "",
+                            encrypted: false,
+                            leaving: false,
+                            uuid: this.uuid
+                    })
+                );
+
+                this.avatar = $('<p>').html(this.avatar).text();
+                this.username = $('<p>').html(this.username).text();
+                this.joined = true;
+            })
         },
         avatarURL: function(avatar) {
              if (avatar.match(/\.(jpeg|jpg|gif|png)$/) != null) {
