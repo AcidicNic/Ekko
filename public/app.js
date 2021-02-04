@@ -92,7 +92,6 @@ new Vue({
             axios.post('/room/exists', {
                 uuid: this.uuid
             }).then(exists => {
-                console.log(exists)
                 if (!exists.data) {
                     Materialize.toast('This room does not exist! please enter a valid room ID', 2000);
                     return
