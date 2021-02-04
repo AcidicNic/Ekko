@@ -117,7 +117,7 @@ new Vue({
              if (avatar.match(/\.(jpeg|jpg|gif|png)$/) != null) {
                 return avatar;
             } else {
-                return "avatar.jpg"
+                return "chat/avatar.jpg"
             }
         }
     }

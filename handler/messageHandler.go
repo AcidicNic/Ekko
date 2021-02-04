@@ -21,7 +21,7 @@ func (h *Handler) HandleMessages() {
 
 			msg.Message = fmt.Sprintf("NEW USER JOINED:  %s", msg.Username)
 			msg.Username = "ATTENTION!"
-			msg.Avatar = "red-alert.png"
+			msg.Avatar = "chat/red-alert.png"
 
 			// Add them to the clients in the room
 			h.Rooms[msg.UUID].Clients[msg.WS] = true
@@ -35,7 +35,7 @@ func (h *Handler) HandleMessages() {
 
 			msg.Message = fmt.Sprintf("USER LEAVING:  %s", msg.Username)
 			msg.Username = "ATTENTION!"
-			msg.Avatar = "red-alert.png"
+			msg.Avatar = "chat/red-alert.png"
 
 			// remove them from the clients map connected to the room
 			delete(h.Rooms[msg.UUID].Clients, msg.WS)
@@ -65,7 +65,7 @@ func first(ws *websocket.Conn) {
 	msg := chat.Message{}
 	msg.Message = fmt.Sprintf("You are the first occupant of this room.")
 	msg.Username = "ATTENTION!"
-	msg.Avatar = "red-alert.png"
+	msg.Avatar = "chat/red-alert.png"
 
 	_ = ws.WriteJSON(msg)
 }
