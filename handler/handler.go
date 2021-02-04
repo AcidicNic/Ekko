@@ -8,8 +8,9 @@ import (
 
 // global variables
 var (
-	UUID      string                           // not being used
-	allUsers  AllUsers                         // not being used
+	UUID      string   // not being used
+	allUsers  AllUsers // not being used
+	rooms     = make(map[string]map[*websocket.Conn]bool)
 	clients   = make(map[*websocket.Conn]bool) // client connections map
 	broadcast = make(chan Message)             // Broadcast Channel
 	// configure the upgrader
@@ -20,14 +21,20 @@ var (
 	}
 )
 
+// Handler handles the requests
+type Handler struct {
+	UUID string
+}
+
 // Message object, defines attributes that a message will have
 type Message struct {
-	Username  string `json:"username"`
-	Message   string `json:"message"`
-	Avatar    string `json:"avatar"`
-	Encrypted bool   `json:"encrypted"`
-	Leaving   bool   `json:"leaving"`
-	UUID      string `json:"uuid"`
+	Username  string          `json:"username"`
+	Message   string          `json:"message"`
+	Avatar    string          `json:"avatar"`
+	Encrypted bool            `json:"encrypted"`
+	Leaving   bool            `json:"leaving"`
+	UUID      string          `json:"uuid"`
+	ws        *websocket.Conn `json:"-"`
 }
 
 // User not being used

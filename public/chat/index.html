@@ -60,6 +60,13 @@
                 </div>
 
             <div class="row">
+                <div class="col s4"></div>
+                    <div class="input-field col s4">
+                            <input type="text" v-model.trim="uuid" placeholder="Room ID">
+                    </div>
+            </div>
+
+            <div class="row">
                     <div class="col s5"></div>
                     <div class="input-field col s2" style="padding-left: 4%">
                             <button class="waves-effect waves-light btn black" @click="join()">

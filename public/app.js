@@ -46,7 +46,8 @@ new Vue({
                         username: this.username,
                         message: "USERLEAVING",
                         encrypted: false,
-                        leaving: true
+                        leaving: true,
+                        uuid: this.uuid
                     })
                 )
             }
@@ -63,7 +64,8 @@ new Vue({
                         message: CryptoJS.AES.encrypt($('<p>').html(this.newMsg).text(),'394812730425442A472D2F423F452848', {
                                                                 mode: CryptoJS.mode.CBC}).toString(), // Strip out html
                         encrypted: true,
-                        leaving: false
+                        leaving: false,
+                        uuid: this.uuid
                     }
                 ));
                 this.newMsg = ''; // Reset newMsg
@@ -80,9 +82,11 @@ new Vue({
                         username: this.username,
                         message: "",
                         encrypted: false,
-                        leaving: false
+                        leaving: false,
+                        uuid: this.uuid
                 })
             );
+            console.log(this.uuid)
             this.avatar = $('<p>').html(this.avatar).text();
             this.username = $('<p>').html(this.username).text();
             this.joined = true;
