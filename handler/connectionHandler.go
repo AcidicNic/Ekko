@@ -27,6 +27,11 @@ func (h *Handler) HandleConnections(c echo.Context) error {
 			break
 		}
 
+		if msg.UUID == "" {
+			// if there is no uuid with the message just skip it
+			continue
+		}
+
 		msg.WS = socket
 		// send the msg to the broadcast channel, to be handled by handleMessage goroutine
 		h.broadcast <- msg

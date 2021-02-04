@@ -11,7 +11,8 @@ new Vue({
         username: null, // Our username
         joined: false, // True if avatar and username have been filled in
         leaving: false, // false unless the user is leaving
-        uuid: null
+        uuid: null,
+        userList: '',
     },
     created: function() {
         var self = this;
@@ -28,6 +29,14 @@ new Vue({
                     + msg.username
                 + '</div>'
                 + emojione.toImage(msg.message) + '<br/>'; // Parse emojis
+
+            let all = ""
+           for ( const [key, val] of Object.entries(msg.users)) {
+               all += '<div class="chip">'
+               + '<img src="' + self.avatarURL(val.avatar) + '">' // Avatar
+               + val.user + '</div>'
+           }
+           self.userList = all
 
             var element = document.getElementById('chat-messages');
             element.scrollTop = element.scrollHeight; // Auto scroll to the bottom

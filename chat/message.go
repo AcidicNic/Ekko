@@ -11,5 +11,5 @@ type Message struct {
 	Leaving   bool            `json:"leaving"`
 	UUID      string          `json:"uuid"`
 	WS        *websocket.Conn `json:"-"`
-	Users     []User
+	Users     map[string]User `json:"users"`
 }

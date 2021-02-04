@@ -13,11 +13,6 @@ func (h *Handler) HandleMessages() {
 	for {
 		msg := <-h.broadcast
 
-		if msg.UUID == "" {
-			// if there is no uuid with the message just skip it
-			continue
-		}
-
 		// if a new user joins. then send a message
 		if msg.Encrypted == false && msg.Leaving == false {
 			usr := chat.NewUser(msg.Username, msg.Avatar)
@@ -35,7 +30,9 @@ func (h *Handler) HandleMessages() {
 				first(msg.WS)
 			}
 		} else if msg.Encrypted == false && msg.Leaving == true {
-			// if a user is leaving, send a message
+			// if a user is leaving delete them and send a message
+			delete(h.Rooms[msg.UUID].Users, msg.Username)
+
 			msg.Message = fmt.Sprintf("USER LEAVING:  %s", msg.Username)
 			msg.Username = "ATTENTION!"
 			msg.Avatar = "red-alert.png"
@@ -43,13 +40,13 @@ func (h *Handler) HandleMessages() {
 			// remove them from the clients map connected to the room
 			delete(h.Rooms[msg.UUID].Clients, msg.WS)
 
-			delete(h.Rooms[msg.UUID].Users, msg.Username)
-
 			// If the last person leaves delete the room
 			if len(h.Rooms[msg.UUID].Clients) == 0 {
 				delete(h.Rooms, msg.UUID)
 			}
 		}
+
+		msg.Users = h.Rooms[msg.UUID].Users
 
 		for client := range h.Rooms[msg.UUID].Clients {
 			err := client.WriteJSON(msg)
