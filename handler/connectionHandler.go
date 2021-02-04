@@ -3,13 +3,14 @@ package handler
 import (
 	"log"
 
+	"github.com/AcidicNic/Ekko/chat"
 	"github.com/labstack/echo/v4"
 )
 
 // HandleConnections maintains the connection for each user in the chat
 func (h *Handler) HandleConnections(c echo.Context) error {
 	// upgrade Get request to websocket
-	socket, err := upgrader.Upgrade(c.Response(), c.Request(), nil)
+	socket, err := h.upgrader.Upgrade(c.Response(), c.Request(), nil)
 	if err != nil {
 		log.Fatal("ConnectionHandler:", err)
 	}
@@ -17,23 +18,18 @@ func (h *Handler) HandleConnections(c echo.Context) error {
 	// close when this function ends
 	defer socket.Close()
 
-	// add client to global clients map
-	clients[socket] = true
-
 	for {
-		var msg Message
+		var msg chat.Message
 
 		// read new msg in as JSON, and initialize is as a Message object
 		err := socket.ReadJSON(&msg)
 		if err != nil {
-			log.Printf("ConnectionHandlerMsg: %v", err)
-			delete(clients, socket)
 			break
 		}
 
-		msg.ws = socket
+		msg.WS = socket
 		// send the msg to the broadcast channel, to be handled by handleMessage goroutine
-		broadcast <- msg
+		h.broadcast <- msg
 	}
 	return nil
 }

@@ -18,7 +18,7 @@ func (s *Server) Routes() {
 	// 	AllowOrigins: []string{"*"},
 	// 	AllowMethods: []string{echo.GET, echo.POST, echo.DELETE, echo.PATCH},
 	// }))
-	r := handler.Handler{}
+	r := handler.NewHandler()
 
 	s.e.Use(middleware.Logger())
 	s.e.Use(middleware.Static(filepath.Join("./public")))
@@ -28,5 +28,5 @@ func (s *Server) Routes() {
 	s.e.GET("/ws", r.HandleConnections)
 
 	// s.e.GET("/chat/:uuid", )
-	go handler.HandleMessages()
+	go r.HandleMessages()
 }

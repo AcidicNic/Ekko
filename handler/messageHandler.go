@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/AcidicNic/Ekko/chat"
 	"github.com/gorilla/websocket"
 )
 
 // HandleMessages sends and receives messages from users.
-func HandleMessages() {
+func (h *Handler) HandleMessages() {
 	for {
-		msg := <-broadcast
+		msg := <-h.broadcast
 
 		if msg.UUID == "" {
 			// if there is no uuid with the message just skip it
@@ -19,16 +20,19 @@ func HandleMessages() {
 
 		// if a new user joins. then send a message
 		if msg.Encrypted == false && msg.Leaving == false {
+			usr := chat.NewUser(msg.Username, msg.Avatar)
+
+			h.Rooms[msg.UUID].Users[usr.Username] = usr
 
 			msg.Message = fmt.Sprintf("NEW USER JOINED:  %s", msg.Username)
 			msg.Username = "ATTENTION!"
 			msg.Avatar = "red-alert.png"
 
-			// Add them to the room
-			rooms[msg.UUID][msg.ws] = true
+			// Add them to the clients in the room
+			h.Rooms[msg.UUID].Clients[msg.WS] = true
 
-			if len(rooms[msg.UUID]) == 1 {
-				first(msg.ws)
+			if len(h.Rooms[msg.UUID].Clients) == 1 {
+				first(msg.WS)
 			}
 		} else if msg.Encrypted == false && msg.Leaving == true {
 			// if a user is leaving, send a message
@@ -37,21 +41,23 @@ func HandleMessages() {
 			msg.Avatar = "red-alert.png"
 
 			// remove them from the clients map connected to the room
-			delete(rooms[msg.UUID], msg.ws)
+			delete(h.Rooms[msg.UUID].Clients, msg.WS)
+
+			delete(h.Rooms[msg.UUID].Users, msg.Username)
 
 			// If the last person leaves delete the room
-			if len(rooms[msg.UUID]) == 0 {
-				delete(rooms, msg.UUID)
+			if len(h.Rooms[msg.UUID].Clients) == 0 {
+				delete(h.Rooms, msg.UUID)
 			}
 		}
 
-		for client := range rooms[msg.UUID] {
-			msg.ws = nil
+		for client := range h.Rooms[msg.UUID].Clients {
 			err := client.WriteJSON(msg)
 			if err != nil {
 				log.Printf("error: %v", err)
+				delete(h.Rooms[msg.UUID].Users, msg.Username)
+				delete(h.Rooms[msg.UUID].Clients, client)
 				client.Close()
-				delete(rooms[msg.UUID], client)
 			}
 		}
 	}
@@ -59,7 +65,7 @@ func HandleMessages() {
 
 // helper function for sending a message to the first user of a room
 func first(ws *websocket.Conn) {
-	msg := Message{}
+	msg := chat.Message{}
 	msg.Message = fmt.Sprintf("You are the first occupant of this room.")
 	msg.Username = "ATTENTION!"
 	msg.Avatar = "red-alert.png"

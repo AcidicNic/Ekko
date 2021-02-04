@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"fmt"
+	"net/http"
 
-	"github.com/gorilla/websocket"
+	"github.com/AcidicNic/Ekko/chat"
 	"github.com/labstack/echo/v4"
 )
 
@@ -18,11 +18,11 @@ func (h *Handler) HandleCreate(c echo.Context) error {
 		return err
 	}
 
-	_, exists := rooms[uuid.UUID]
+	_, exists := h.Rooms[uuid.UUID]
 	if !exists {
-		rooms[uuid.UUID] = make(map[*websocket.Conn]bool)
+		h.Rooms[uuid.UUID] = chat.NewRoom(uuid.UUID)
+		return c.Redirect(301, "/")
 	}
 
-	fmt.Println("uuid: ", uuid.UUID)
-	return c.Redirect(301, "/")
+	return c.Redirect(http.StatusTemporaryRedirect, "/create")
 }
