@@ -13,7 +13,7 @@ $ git clone https://www.github.com/AcidicNic/Ekko
 $ cd Ekko
 $ cd src
 $ go build main.go
-$ go run main.go
+$ ./Ekko
 ```
 navigate to localhost:8080
 
